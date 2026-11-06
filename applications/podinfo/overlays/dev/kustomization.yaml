@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: podinfo-dev
+
+resources:
+  - ../../base
+
+replicas:
+  - name: podinfo
+    count: 1
+
+images:
+  - name: ghcr.io/stefanprodan/podinfo
+    newTag: 6.15.0
+
+patches:
+  - target:
+      kind: Deployment
+      name: podinfo
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/requests/cpu
+        value: 50m
