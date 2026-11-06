@@ -8,7 +8,7 @@ resources:
 
 replicas:
   - name: podinfo
-    count: 1
+    count: 2
 
 images:
   - name: ghcr.io/stefanprodan/podinfo
